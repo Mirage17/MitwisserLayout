@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".opciones">
+
+     <TextView
+         android:id="@+id/tv_imagen"
+         android:layout_width="match_parent"
+         android:layout_height="264dp"
+         android:gravity="center"
+         android:text="@string/userpic" />
+
+     <TextView
+         android:id="@+id/tv_ChangeImagePic"
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:paddingVertical="12dp"
+         android:paddingLeft="15dp"
+         android:background="@drawable/rounded_buton_login_register"
+         android:text="@string/changeuserpic"
+         android:textSize="18sp" />
+
+     <Spinner
+         android:id="@+id/spinner"
+         android:layout_width="match_parent"
+         android:paddingVertical="12dp"
+         android:paddingLeft="15dp"
+         android:background="@drawable/rounded_buton_login_register"
+         android:layout_height="66dp"
+         android:entries="@array/time2live" />
+
+     <TextView
+         android:id="@+id/et_logout"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+          android:textSize="18sp"
+         android:background="@drawable/rounded_buton_login_register"
+         android:paddingVertical="12dp"
+         android:paddingLeft="15dp"
+         android:text="@string/logout" />
+
+</LinearLayout>
