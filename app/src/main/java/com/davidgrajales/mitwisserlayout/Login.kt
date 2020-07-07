@@ -23,17 +23,17 @@ class Login : AppCompatActivity() {
 
         b_logEnter.setOnClickListener {
 
-            val email=et_email.text.toString()
+           /* val email=et_email.text.toString()
             val usuarioDAO:UsuarioDAO=SesionRoom.database.UsuarioDAO()
-            val usuario=usuarioDAO.buscarUsuario(email)
+            val usuario=usuarioDAO.buscarUsuario(email)*/
 
-            if(usuario!=null){
+            //if(usuario!=null){
                 val intent=Intent(this,MainActivity::class.java)
                 startActivity(intent)
-            }
-            else{
-                Toast.makeText(this,"campos por llenar o incorrectos",Toast.LENGTH_LONG).show()
-            }
+            //}
+            //else{
+                //Toast.makeText(this,"campos por llenar o incorrectos",Toast.LENGTH_LONG).show()
+           // }
            /* val password=et_password.text.toString()
             val email=et_email.text.toString()
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
