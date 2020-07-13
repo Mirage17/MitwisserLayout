@@ -1,14 +1,14 @@
 package com.davidgrajales.mitwisserlayout
 
-import android.app.Activity
+
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.davidgrajales.mitwisserlayout.model.UsuarioDAO
+import androidx.appcompat.app.AppCompatActivity
+
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_registro.*
+
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,42 +19,54 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
+        val mAuth:FirebaseAuth=FirebaseAuth.getInstance()
 
         b_logEnter.setOnClickListener {
 
-           /* val email=et_email.text.toString()
-            val usuarioDAO:UsuarioDAO=SesionRoom.database.UsuarioDAO()
-            val usuario=usuarioDAO.buscarUsuario(email)*/
+            val email =et_correo.text.toString()
+            val password = et_pass.text.toString()
+            mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(
+                    this
+                ) { task ->
+                    if (task.isSuccessful) {
+                        StartMain()
 
-            //if(usuario!=null){
-                val intent=Intent(this,MainActivity::class.java)
-                startActivity(intent)
-            //}
-            //else{
-                //Toast.makeText(this,"campos por llenar o incorrectos",Toast.LENGTH_LONG).show()
-           // }
-           /* val password=et_password.text.toString()
-            val email=et_email.text.toString()
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-            //.addOnCompleteListener()
-            //.add*/
- 
+                    } else {
 
-        }
+                        ShowMessage("Autentificación fallida")
+
+
+                    }
+
+                    // ...
+                }
+
+            }
+
 
         b_log2Register.setOnClickListener {
 
 
-
-            val intent: Intent = Intent(this, Registro::class.java)
-            startActivity(intent)
-            finish()
+            StartRegister()
 
         }
 
     }
 
+    private fun StartRegister() {
+
+        startActivity(Intent(this, Registrarse::class.java))
+    }
+
+    private fun StartMain() {
+        startActivity(Intent(this, MainActivity::class.java))
+
+    }
+
+    private fun ShowMessage(msg:String){
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show()
+    }
 
 }
 

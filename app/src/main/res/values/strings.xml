@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mitwisser</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nomUsuario">Correo</string>
     <string name="Entrar">Entrar</string>

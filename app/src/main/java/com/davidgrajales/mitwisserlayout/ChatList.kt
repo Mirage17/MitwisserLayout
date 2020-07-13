@@ -1,14 +1,14 @@
 package com.davidgrajales.mitwisserlayout
 
-import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.room.Room
-import com.davidgrajales.mitwisserlayout.model.UsuarioDatabase
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 
@@ -29,6 +29,12 @@ class ChatList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val mAuth:FirebaseAuth=FirebaseAuth.getInstance()
+        val user:FirebaseUser?=mAuth.currentUser
+        val correo=user?.email
+
+        ShowMessage("bienvenido $correo")
         val adapter=GroupAdapter<ViewHolder>()
         adapter.add(UserItem())
         adapter.add(UserItem())
@@ -47,6 +53,10 @@ class ChatList : Fragment() {
         }
 
 
+    }
+
+    private fun ShowMessage(msg:String){
+        Toast.makeText(requireContext(),msg, Toast.LENGTH_LONG).show()
     }
 
 
