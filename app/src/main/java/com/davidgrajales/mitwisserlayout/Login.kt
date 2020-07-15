@@ -11,6 +11,14 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 
 class Login : AppCompatActivity() {
+    val mAuth:FirebaseAuth=FirebaseAuth.getInstance()
+   /* override fun onStart() {
+        super.onStart()
+        val user =mAuth.currentUser
+
+        if(user!=null)
+            StartMain()
+    }*/
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Thread.sleep(1000)
@@ -19,7 +27,6 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val mAuth:FirebaseAuth=FirebaseAuth.getInstance()
 
         b_logEnter.setOnClickListener {
 

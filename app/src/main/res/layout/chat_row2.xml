@@ -9,12 +9,11 @@
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginStart="116dp"
         android:background="@drawable/rounded_buton_login_register"
         android:padding="10dp"
-        android:text="Esto es una prueba de mi mensaje"
         android:textColor="@android:color/white"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
