@@ -15,6 +15,7 @@
     <string name="logout">Cerrar Sesión</string>
     <string name="userpic">La imagen de perfil va aquí</string>
     <string name="nickcame">Ingrese su nickname</string>
+    <string name="changeImage">Cambiar imagen de perfil</string>
     <string-array name="time2live">
         <item>Escoja tiempo de vida (minutos)</item>
         <item>1</item>

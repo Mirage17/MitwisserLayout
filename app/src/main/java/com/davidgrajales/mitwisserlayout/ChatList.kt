@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 
@@ -25,6 +26,10 @@ import kotlinx.android.synthetic.main.messages_list_unit.view.*
 
 
 class ChatList : Fragment() {
+
+    companion object{
+        val USER_KEY="USER_KEY"
+    }
 
 
     override fun onCreateView(
@@ -67,12 +72,19 @@ class ChatList : Fragment() {
                     if(user!=null) {
                         adapter.add(UserItem(user))
                     }
+
+                }
+                adapter.setOnItemClickListener { item, view ->
+                    val userItem=item as UserItem
+                    val intent=Intent(context,chat::class.java)
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
                 }
                 rv_m_list.adapter=adapter
             }
 
         }
-       
+
         ref.addListenerForSingleValueEvent(postListener)
 
     }
@@ -94,8 +106,9 @@ class UserItem(val user:Usuario):Item<ViewHolder>(){
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-    viewHolder.itemView.tv_userName.text=user.nickName
-       // Piccaso.get().load(user.profileImageURL).into(viewHolder.itemView.iv_userPickture_)
+        viewHolder.itemView.tv_userName.text=user.nickName
+        //Picasso.get().load(user.urlPicture).into(viewHolder.itemView.iv_userPicture)
+
     }
 
 }

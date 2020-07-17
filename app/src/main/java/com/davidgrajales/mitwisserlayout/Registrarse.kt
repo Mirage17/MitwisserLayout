@@ -9,14 +9,14 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_registrarse.*
 
-
+val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 class Registrarse : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrarse)
 
 
-        val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
 
 
         b_save.setOnClickListener {
@@ -30,7 +30,7 @@ class Registrarse : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         //createUserInDatabase()
-                        GuardarEnDatabase(nickname,email,password)
+                        GuardarEnDatabase(nickname,email,password,"prueba")
                         ShowMessage("Creación de usuario exitosa")
                         onBackPressed()
                     } else {
@@ -54,15 +54,17 @@ class Registrarse : AppCompatActivity() {
         Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
 
-    private  fun GuardarEnDatabase(nick:String, correo:String,pass:String){
+    private  fun GuardarEnDatabase(nick:String, correo:String,pass:String,url:String){
         val database:FirebaseDatabase= FirebaseDatabase.getInstance()
         val myRef:DatabaseReference=database.getReference("usuario")
-        val id: String?= myRef.push().key
+        val id=FirebaseAuth.getInstance().uid //String?= myRef.push().key
         val usuario=Usuario(
             id,
             nick,
             correo,
-            pass
+            pass,
+            url
+
         )
         myRef.child(id!!).setValue(usuario)
 

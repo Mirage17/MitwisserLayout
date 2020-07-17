@@ -1,11 +1,11 @@
 package com.davidgrajales.mitwisserlayout.model
 
-class ChatMessage (
+class multimedia (
     val id:String?,
-    val fromID:String?,
-    val toId:String?,
+    val fromID:String,
+    val toId:String,
     val moment:Long,
-    val text:String
+    val url:String
 ){
     constructor(): this("","","",0,"")
 }

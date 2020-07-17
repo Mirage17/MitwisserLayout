@@ -7,58 +7,47 @@
     android:layout_height="match_parent"
     tools:context=".opciones">
 
-     <TextView
-         android:id="@+id/tv_imagen"
+     <ImageView
+         android:id="@+id/iv_userPicture"
          android:layout_width="0dp"
          android:layout_height="0dp"
-         android:gravity="center"
-         android:text="@string/userpic"
-         app:layout_constraintBottom_toTopOf="@+id/tv_ChangeImagePic"
+         android:src="@android:drawable/ic_menu_gallery"
+         app:layout_constraintBottom_toTopOf="@+id/b_ChangeImagePic"
          app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.0"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent" />
 
-     <TextView
-         android:id="@+id/tv_ChangeImagePic"
+     <Button
+         android:id="@+id/b_ChangeImagePic"
          android:layout_width="0dp"
-         android:layout_height="50dp"
-         android:background="@drawable/rounded_buton_login_register"
-         android:paddingVertical="12dp"
-         android:paddingLeft="15dp"
-         android:text="@string/changeuserpic"
-         android:textSize="18sp"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="8dp"
+         android:text="@string/changeImage"
+         app:layout_constraintBottom_toTopOf="@+id/s_time2live"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="0.0"
-         app:layout_constraintStart_toStartOf="parent"
-         tools:layout_editor_absoluteY="262dp" />
+         app:layout_constraintStart_toStartOf="parent" />
+
+     <Button
+         android:id="@+id/b_logOut"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="208dp"
+         android:text="@string/logout"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent" />
 
      <Spinner
-         android:id="@+id/spinner"
+         android:id="@+id/s_time2live"
          android:layout_width="0dp"
-         android:layout_height="50dp"
-         android:layout_marginTop="28dp"
-         android:background="@drawable/rounded_buton_login_register"
+         android:layout_height="40dp"
          android:entries="@array/time2live"
-         android:paddingVertical="12dp"
-         android:paddingLeft="15dp"
+         android:spinnerMode="dialog"
+         app:layout_constraintBottom_toTopOf="@+id/b_logOut"
          app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.0"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/tv_ChangeImagePic" />
-
-     <TextView
-         android:id="@+id/et_logout"
-         android:layout_width="0dp"
-         android:layout_height="50dp"
-         android:layout_marginTop="28dp"
-         android:background="@drawable/rounded_buton_login_register"
-         android:paddingVertical="12dp"
-         android:paddingLeft="15dp"
-         android:text="@string/logout"
-         android:textSize="18sp"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.0"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/spinner" />
+         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
