@@ -13,7 +13,7 @@
 
     <Button
         android:id="@+id/b_save"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="29dp"
         android:background="@drawable/rounded_buton_login_register"
@@ -33,7 +33,7 @@
         android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="112dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         <com.google.android.material.textfield.TextInputEditText
 
             android:id="@+id/et_email"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/rounded_corner_editex"
@@ -65,14 +65,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_nickname"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:textColor="@android:color/black"
             android:background="@drawable/rounded_corner_editex"
             android:ems="10"
             android:hint="@string/nickcame"
             android:paddingHorizontal="15dp"
+            android:textColor="@android:color/black"
 
             android:textColorHint="#ffffff" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +87,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_pass"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/rounded_corner_editex"

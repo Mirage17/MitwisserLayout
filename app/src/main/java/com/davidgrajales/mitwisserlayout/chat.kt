@@ -5,20 +5,21 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
-import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import com.davidgrajales.mitwisserlayout.model.ChatMessage
+import com.davidgrajales.mitwisserlayout.model.Multimedia
 import com.davidgrajales.mitwisserlayout.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.chat_row1.view.text
+import kotlinx.android.synthetic.main.chat_row1.view.*
 import kotlinx.android.synthetic.main.fragment_opciones.*
+import kotlinx.android.synthetic.main.picture_row_from.view.*
 
 
 class chat : AppCompatActivity() {
@@ -95,9 +96,9 @@ class chat : AppCompatActivity() {
                 val chatMessage=snapshot.getValue(ChatMessage::class.java)
                 if(et_message!=null){
                     if(chatMessage!!.fromID==FirebaseAuth.getInstance().uid){
-                        adapter.add(ChatItemFrom(chatMessage!!.text))
+                        adapter.add(ChatItemFrom(chatMessage.text))
                     }else{
-                        adapter.add(ChatItemTo(chatMessage!!.text))
+                        adapter.add(ChatItemTo(chatMessage.text))
                     }
 
 
@@ -147,9 +148,10 @@ class chat : AppCompatActivity() {
     }
     companion object {
         //image pick code
-        private val IMAGE_PICK_CODE = 1000;
+        private val IMAGE_PICK_CODE = 1000
+
         //Permission code
-        private val PERMISSION_CODE = 1001;
+        private val PERMISSION_CODE = 1001
     }
 
 
@@ -169,28 +171,48 @@ class chat : AppCompatActivity() {
 }
 
 
-
-
-
-
-
-class ChatItemFrom(val words:String): Item<ViewHolder>(){
+class ChatItemFrom(val words: String) : Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-    viewHolder.itemView.text.text=words
+        viewHolder.itemView.text.text = words
     }
 
     override fun getLayout(): Int {
         return R.layout.chat_row1
     }
 }
+
 class ChatItemTo(val words: String) : Item<ViewHolder>() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-    viewHolder.itemView.text.text=words
+        viewHolder.itemView.text.text = words
     }
 
     override fun getLayout(): Int {
         return R.layout.chat_row2
     }
 
+}
+
+class ChatItemPickFrom(val user: Usuario, val multimedia: Multimedia) : Item<ViewHolder>() {
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        Picasso.get().load(user.urlPicture).into(viewHolder.itemView.iv_pic1)
+        Picasso.get().load(multimedia.url).into(viewHolder.itemView.iv_pictureSent)
+
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.picture_row_from
+    }
+}
+
+class ChatItemPickTo(val user: Usuario, val multimedia: Multimedia) : Item<ViewHolder>() {
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        Picasso.get().load(user.urlPicture).into(viewHolder.itemView.iv_pic1)
+        Picasso.get().load(multimedia.url).into(viewHolder.itemView.iv_pictureSent)
+
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.picture_row_to
+    }
 }
