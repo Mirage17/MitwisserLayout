@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
+import androidx.activity.OnBackPressedCallback
 import com.davidgrajales.mitwisserlayout.model.ChatMessage
 import com.davidgrajales.mitwisserlayout.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
@@ -43,6 +44,14 @@ class chat : AppCompatActivity() {
         bt_sendMessage.setOnClickListener{
 
             SendMessage()
+
+        }
+
+        ib_sendPictures.setOnClickListener{
+
+
+            pickImageFromGallery()
+
 
         }
 
@@ -103,22 +112,6 @@ class chat : AppCompatActivity() {
         })
     }
 
-
-
-
-    private fun ShowDummyChatExample() {
-        val adapter = GroupAdapter<ViewHolder>()
-        adapter.add(ChatItemFrom("este es el texto que pone \n la persona que envia el\n mensaje desde "))
-        adapter.add(ChatItemTo("y aquí aparece el \ntexto de la persona al otro\n lado de la linea desde el" +
-                "\npunto de vista del"))
-
-
-
-
-        rv_chat.adapter = adapter
-    }
-
-
     private fun permissionInManifest(context: Context, permissionImage:String):Boolean{
         val packageName=context.packageName
         try {
@@ -136,6 +129,14 @@ class chat : AppCompatActivity() {
 
         }
         return false
+    }
+
+    private fun SabeImageInStorage(){
+        val database:FirebaseDatabase=FirebaseDatabase.getInstance()
+        val myRef:DatabaseReference=database.getReference("multimedia")
+        var urlPhoto=""
+
+
     }
 
     private fun pickImageFromGallery() {
@@ -164,7 +165,10 @@ class chat : AppCompatActivity() {
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
+
 }
+
+
 
 
 

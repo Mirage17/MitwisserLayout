@@ -58,15 +58,16 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_correo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:textColor="#222222"
-            android:paddingHorizontal="15dp"
             android:layout_gravity="center"
             android:background="@drawable/rounded_corner_editex"
             android:ems="10"
             android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="15dp"
 
+            android:textColor="#222222"
             android:textColorHint="#ffffff" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,14 +83,15 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_pass"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:textColor="#222222"
-            android:paddingHorizontal="15dp"
             android:layout_gravity="center"
             android:background="@drawable/rounded_corner_editex"
             android:ems="10"
             android:hint="@string/password"
-            android:textColorHint="#E6373737" />
+            android:inputType="textPassword"
+            android:paddingHorizontal="15dp"
+            android:textColor="#222222"
+            android:textColorHint="#E6FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

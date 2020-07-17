@@ -11,19 +11,13 @@
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-    <TextView
-        android:id="@+id/tv_userName"
-        android:gravity="center"
-        android:layout_width="0dp"
-
-        android:layout_height="50dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/iv_userPicture"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?android:attr/galleryItemBackground" />
 </androidx.constraintlayout.widget.ConstraintLayout>

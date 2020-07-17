@@ -1,27 +1,29 @@
 package com.davidgrajales.mitwisserlayout
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Picture
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.PermissionChecker.checkSelfPermission
-
+import androidx.fragment.app.Fragment
+import com.davidgrajales.mitwisserlayout.model.Usuario
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.fragment_opciones.*
+import java.io.ByteArrayOutputStream
 
 class opciones : Fragment() {
 
@@ -51,8 +53,17 @@ class opciones : Fragment() {
             pickImageFromGallery()
 
 
+
+        }
+
+        b_logOut.setOnClickListener{
+            Firebase.auth.signOut()
+            activity?.finish()
+
         }
     }
+
+
 
     private fun permissionInManifest(context: Context,permissionImage:String):Boolean{
         val packageName=context.packageName
@@ -102,6 +113,46 @@ class opciones : Fragment() {
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+    private fun guardarImagenEnFirebaseStorage(){
+        val database:FirebaseDatabase= FirebaseDatabase.getInstance()
+        val myRef:DatabaseReference=database.getReference("usurio")
+        val userId= FirebaseAuth.getInstance().uid
+        var urlPicture=""
+        val mStorage:FirebaseStorage= FirebaseStorage.getInstance()
+        val pictureRef=mStorage.reference.child(userId!!)
+
+        iv_userPicture.isDrawingCacheEnabled=true
+        iv_userPicture.buildDrawingCache()
+        val bitmap=(iv_userPicture.drawable as BitmapDrawable).bitmap
+        val baos=ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, baos)
+        val data:ByteArray=baos.toByteArray()
+        var uploadTask = pictureRef.putBytes(data)
+        val urlTask = uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            pictureRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                urlPicture = task.result.toString()
+
+                val childUpdate=HashMap<String,Any>()
+                childUpdate["urlPicture"]=urlPicture
+
+                myRef.child(userId).updateChildren(childUpdate)
+
+            } else {
+                // Handle failures
+                // ...
+            }
+        }
+
+
+
     }
 
 

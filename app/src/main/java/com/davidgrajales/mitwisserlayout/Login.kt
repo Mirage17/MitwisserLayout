@@ -3,6 +3,7 @@ package com.davidgrajales.mitwisserlayout
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -12,13 +13,13 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {
     val mAuth:FirebaseAuth=FirebaseAuth.getInstance()
-   /* override fun onStart() {
+    override fun onStart() {
         super.onStart()
         val user =mAuth.currentUser
 
         if(user!=null)
             StartMain()
-    }*/
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Thread.sleep(1000)
@@ -30,18 +31,24 @@ class Login : AppCompatActivity() {
 
         b_logEnter.setOnClickListener {
 
-            val email =et_correo.text.toString()
-            val password = et_pass.text.toString()
+            var email =et_correo.text.toString()
+            var password = et_pass.text.toString()
             mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
                     this
                 ) { task ->
                     if (task.isSuccessful) {
+
+                        et_correo.text?.clear()
+                        et_pass.text?.clear()
+
+
                         StartMain()
 
                     } else {
 
-                        ShowMessage("Autentificación fallida")
+
+                        ShowMessage(task.exception!!.message.toString())
 
 
                     }

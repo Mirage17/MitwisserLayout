@@ -26,6 +26,7 @@
         android:id="@+id/bt_sendMessage"
         android:layout_width="50dp"
         android:layout_height="50dp"
+
         android:background="@drawable/rounded_buton_login_register"
         android:src="@android:drawable/ic_menu_send"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,10 +49,11 @@
         app:layout_constraintEnd_toStartOf="@+id/bt_sendMessage"
         app:layout_constraintStart_toEndOf="@+id/ib_sendPictures" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/ib_sendPictures"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@drawable/rounded_buton_login_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_camera" />

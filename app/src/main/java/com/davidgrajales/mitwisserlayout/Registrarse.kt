@@ -31,11 +31,11 @@ class Registrarse : AppCompatActivity() {
 
                         //createUserInDatabase()
                         GuardarEnDatabase(nickname,email,password,"prueba")
-                        ShowMessage("Creación de usuario exitosa")
+                        ShowMessage("User successfuly created")
                         onBackPressed()
                     } else {
 
-                        ShowMessage("Creasión de usuario fallida")
+                        ShowMessage(task.exception!!.message.toString())
 
 
                     }
