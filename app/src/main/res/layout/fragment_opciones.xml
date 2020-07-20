@@ -11,6 +11,7 @@
          android:id="@+id/iv_userPicture"
          android:layout_width="0dp"
          android:layout_height="0dp"
+         android:adjustViewBounds="true"
          android:src="@android:drawable/ic_menu_gallery"
          app:layout_constraintBottom_toTopOf="@+id/b_ChangeImagePic"
          app:layout_constraintEnd_toEndOf="parent"

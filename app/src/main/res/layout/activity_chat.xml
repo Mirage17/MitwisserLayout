@@ -8,6 +8,16 @@
 
     tools:context=".chat">
 
+    <ImageView
+        android:id="@+id/iv_storagepick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="574dp"
+        android:alpha="0"
+        app:layout_constraintBottom_toTopOf="@+id/et_message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -43,12 +53,12 @@
         android:id="@+id/et_message"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:ems="10"
         android:background="@drawable/not_rounded_button"
+        android:ems="10"
         android:gravity="start|top"
+        android:inputType="textMultiLine"
         android:paddingHorizontal="6dp"
         android:paddingVertical="10dp"
-        android:inputType="textMultiLine"
         android:textColor="#C8C8C8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bt_sendMessage"

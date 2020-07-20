@@ -2,12 +2,11 @@ package com.davidgrajales.mitwisserlayout
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import com.davidgrajales.mitwisserlayout.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -18,34 +17,43 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
-
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_login.view.*
 import kotlinx.android.synthetic.main.fragment_chat_list.*
 import kotlinx.android.synthetic.main.messages_list_unit.view.*
 
 
 class ChatList : Fragment() {
 
-    companion object{
-        val USER_KEY="USER_KEY"
+    companion object {
+        val USER_KEY = "USER_KEY"
     }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         // Inflate the layout for this fragment
+
+
         return inflater.inflate(R.layout.fragment_chat_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        val mAuth:FirebaseAuth=FirebaseAuth.getInstance()
-        val user:FirebaseUser?=mAuth.currentUser
-        val correo=user?.email
+        super.onViewCreated(view, savedInstanceState)
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+
+
+                // in here you can do logic when backPress is clicked
+            }
+        })
+
+        val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+        val user: FirebaseUser? = mAuth.currentUser
+        val correo = user?.email
 
         //ShowMessage("bienvenido $correo")
 
@@ -85,20 +93,13 @@ class ChatList : Fragment() {
 
         }
 
+
         ref.addListenerForSingleValueEvent(postListener)
 
     }
 
-    }
 
-
-
-    /*private fun ShowMessage(msg:String){
-        Toast.makeText(requireContext(),msg, Toast.LENGTH_LONG).show()
-    }
-
-
-}*/
+}
 
 class UserItem(val user:Usuario):Item<ViewHolder>(){
     override fun getLayout(): Int {
@@ -107,8 +108,11 @@ class UserItem(val user:Usuario):Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.tv_userName.text=user.nickName
-        //Picasso.get().load(user.urlPicture).into(viewHolder.itemView.iv_userPicture)
+        Picasso.get().load(user.urlPicture).into(viewHolder.itemView.iv_userPicture)
 
     }
 
+
 }
+
+
