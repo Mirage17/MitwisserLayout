@@ -1,4 +1,4 @@
-package com.davidgrajales.mitwisserlayout
+package com.davidgrajales.mitwisserlayout.chatStuff
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import com.davidgrajales.mitwisserlayout.R
 import com.davidgrajales.mitwisserlayout.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -78,13 +79,21 @@ class ChatList : Fragment() {
                 snapshot.children.forEach {
                     val user=it.getValue(Usuario::class.java)
                     if(user!=null) {
-                        adapter.add(UserItem(user))
+                        //if(user.id==FirebaseAuth.getInstance().uid) return
+                        adapter.add(
+                            UserItem(
+                                user
+                            )
+                        )
                     }
 
                 }
                 adapter.setOnItemClickListener { item, view ->
-                    val userItem=item as UserItem
-                    val intent=Intent(context,chat::class.java)
+                    val userItem = item as UserItem
+                    val intent = Intent(
+                        context,
+                        chat::class.java
+                    )
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
                 }

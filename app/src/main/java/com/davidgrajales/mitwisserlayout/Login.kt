@@ -15,8 +15,10 @@ class Login : AppCompatActivity() {
         super.onStart()
         val user =mAuth.currentUser
 
-        if(user!=null)
+        if (user != null) {
             StartMain()
+            finish()
+        }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
 

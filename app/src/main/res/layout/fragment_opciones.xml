@@ -12,6 +12,7 @@
          android:layout_width="0dp"
          android:layout_height="0dp"
          android:adjustViewBounds="true"
+         android:scaleType="centerCrop"
          android:src="@android:drawable/ic_menu_gallery"
          app:layout_constraintBottom_toTopOf="@+id/b_ChangeImagePic"
          app:layout_constraintEnd_toEndOf="parent"
@@ -41,14 +42,25 @@
          app:layout_constraintHorizontal_bias="0.0"
          app:layout_constraintStart_toStartOf="parent" />
 
-     <Spinner
-         android:id="@+id/s_time2live"
-         android:layout_width="0dp"
-         android:layout_height="40dp"
-         android:entries="@array/time2live"
-         android:spinnerMode="dialog"
-         app:layout_constraintBottom_toTopOf="@+id/b_logOut"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="parent" />
+    <Spinner
+        android:id="@+id/s_time2live"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:entries="@array/time2live"
+        android:spinnerMode="dialog"
+
+        app:layout_constraintBottom_toTopOf="@+id/b_SaveTimeToLive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/b_SaveTimeToLive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:text="@string/savet2l"
+        app:layout_constraintBottom_toTopOf="@+id/b_logOut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

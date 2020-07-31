@@ -1,8 +1,8 @@
 package com.davidgrajales.mitwisserlayout
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.davidgrajales.mitwisserlayout.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -22,26 +22,33 @@ class Registrarse : AppCompatActivity() {
         b_save.setOnClickListener {
             val email = et_email.text.toString()
             val password = et_pass.text.toString()
-            val nickname=et_nickname.text.toString()
-            mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(
-                    this
-                ) { task ->
-                    if (task.isSuccessful) {
+            val nickname = et_nickname.text.toString()
+            val password2 = et_pass2.text.toString()
+            if (password == password2) {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(
+                        this
+                    ) { task ->
+                        if (task.isSuccessful) {
 
-                        //createUserInDatabase()
-                        GuardarEnDatabase(nickname,email,password,"prueba")
-                        ShowMessage("User successfuly created")
-                        onBackPressed()
-                    } else {
+                            //createUserInDatabase()
+                            GuardarEnDatabase(nickname, email, password, "prueba")
+                            ShowMessage("User successfuly created")
+                            onBackPressed()
+                        } else {
 
-                        ShowMessage(task.exception!!.message.toString())
-
-
+                            ShowMessage(task.exception!!.message.toString())
+                        }
                     }
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "Las contraseñas no coinciden",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
 
-                }
 
         }
 

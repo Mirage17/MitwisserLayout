@@ -1,9 +1,9 @@
 package com.davidgrajales.mitwisserlayout
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.davidgrajales.mitwisserlayout.chatStuff.ChatList
 
 class ViewPagerAdapter(fa:FragmentActivity): FragmentStateAdapter(fa) {
 
@@ -15,10 +15,12 @@ class ViewPagerAdapter(fa:FragmentActivity): FragmentStateAdapter(fa) {
     }
 
     override fun createFragment(position: Int): Fragment {
-       return when(position){
-            0->{ChatList()}
+       return when (position) {
+           0 -> {
+               ChatList()
+           }
 
-           else ->opciones()
+           else -> opciones()
        }
 
     }

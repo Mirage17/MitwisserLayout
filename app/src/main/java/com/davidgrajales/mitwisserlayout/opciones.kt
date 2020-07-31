@@ -11,14 +11,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.davidgrajales.mitwisserlayout.chatStuff.chat
 import com.davidgrajales.mitwisserlayout.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_opciones.*
 import java.io.ByteArrayOutputStream
 
@@ -28,8 +29,16 @@ class opciones : Fragment() {
     private val IMAGE_RESULT = 200
     private val REQUEST_IMAGE_CAPTURE = 12345
 
+    companion object {
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000
 
+        //Permission code
+        private val PERMISSION_CODE = 1001
+        var usuarioActual: Usuario? = null
+        val TIME2LIVE = "TIME_TO_LIVE"
 
+    }
 
 
     override fun onCreateView(
@@ -38,27 +47,32 @@ class opciones : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
+        obtenerUsuarioActual()
         return inflater.inflate(R.layout.fragment_opciones, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //mostrarurl(FirebaseAuth.getInstance().uid.toString())
 
-        val userId = FirebaseAuth.getInstance().uid
         b_ChangeImagePic.setOnClickListener {
-
-            originalImageDatabase(userId)
-
+            originalImageDatabase(usuarioActual?.id)
             pickImageFromGallery()
-
-
         }
 
         b_logOut.setOnClickListener {
             Firebase.auth.signOut()
             activity?.finish()
-
         }
+
+        b_SaveTimeToLive.setOnClickListener {
+            var timeToLive = s_time2live.selectedItem.toString()
+            val intent = Intent(
+                context,
+                chat::class.java
+            )
+            intent.putExtra(TIME2LIVE, timeToLive)
+        }
+
+
     }
 
     private fun originalImageDatabase(userId: String?) {
@@ -82,15 +96,10 @@ class opciones : Fragment() {
                 }
                 if (!userThereIs) {
                     // Toast.makeText(requireContext(),user?.id, Toast.LENGTH_LONG).show()
-
                 }
-
             }
-
-
         }
         myRef.addValueEventListener(postListener)
-
     }
 
 
@@ -119,17 +128,25 @@ class opciones : Fragment() {
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_PICK_CODE)
     }
-    companion object {
-        //image pick code
-        private val IMAGE_PICK_CODE = 1000
 
-        //Permission code
-        private val PERMISSION_CODE = 1001
-    }
+    private fun obtenerUsuarioActual() {
+        val id = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("usuario/$id")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
 
-    private fun backFragment() {
-        val manager = (context as AppCompatActivity).supportFragmentManager
-        manager.popBackStackImmediate()
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                usuarioActual = snapshot.getValue(Usuario::class.java)
+                if (usuarioActual?.urlPicture != null) {
+                    Picasso.get().load(usuarioActual?.urlPicture).into(iv_userPicture)
+
+                }
+
+            }
+
+        })
     }
 
     var imageUri: Uri? = null
@@ -186,8 +203,6 @@ class opciones : Fragment() {
 
 
     }
-
-
 
 
 
