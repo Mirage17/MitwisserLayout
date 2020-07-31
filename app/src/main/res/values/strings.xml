@@ -18,6 +18,8 @@
     <string name="changeImage">Cambiar imagen de perfil</string>
     <string name="confirmPass">Confirmar Contraseña</string>
     <string name="savet2l">Salvar tiempo de vida</string>
+    <string name="_2_minutos">2 Minutos</string>
+    <string name="_1_minuto">1 Minuto</string>
     <string-array name="time2live">
         <item>Escoja tiempo de vida (minutos)</item>
         <item>1</item>

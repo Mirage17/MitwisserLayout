@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.davidgrajales.mitwisserlayout.R
@@ -61,6 +62,29 @@ class chat : AppCompatActivity() {
         ListenigPictures()
         SendTime2Live2Firebase()
 
+        iv_time2live.setOnClickListener {
+            showToas("Elija tiempo de vida de los mensajes")
+            val popupMenu = PopupMenu(this, it)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.time1 -> {
+                        showToas("Autodestrucción en un minuto")
+                        true
+                    }
+                    R.id.time2 -> {
+                        showToas("autodestrucción en 2 minutos")
+                        true
+                    }
+                    else -> false
+                }
+
+            }
+            popupMenu.inflate(R.menu.time_to_live_menu)
+            popupMenu.show()
+        }
+
+
+
         bt_sendMessage.setOnClickListener {
 
             SendMessage()
@@ -71,6 +95,14 @@ class chat : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun showToas(s: String) {
+        Toast.makeText(
+            this,
+            s,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun SendTime2Live2Firebase() {
