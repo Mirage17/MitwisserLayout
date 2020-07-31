@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.davidgrajales.mitwisserlayout.model.ChatMessage
 import com.davidgrajales.mitwisserlayout.model.Multimedia
@@ -42,11 +44,39 @@ class chat : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        rv_chat.adapter=adapter
+        iv_time2live.setOnClickListener {
+            val popupMenu = PopupMenu(this, it)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.time1 -> {
+                        Toast.makeText(
+                            this,
+                            "Tiempo de vida de mensajes: 1 minuto",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        true
+                    }
+                    R.id.time2 -> {
+                        Toast.makeText(
+                            this,
+                            "Tiempo de vida de mensajes: 2 minuto",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        true
+                    }
+                    else -> false
+                }
+
+            }
+            popupMenu.inflate(R.menu.time_to_live_menu)
+            popupMenu.show()
+        }
+
+        rv_chat.adapter = adapter
 
         ListeningMesages()
 
-        bt_sendMessage.setOnClickListener{
+        bt_sendMessage.setOnClickListener {
 
             SendMessage()
 
